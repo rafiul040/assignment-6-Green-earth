@@ -1,13 +1,47 @@
-const loadCategories = () => {
+const removeActive = () => {
+  const lessonButtons = document.querySelectorAll('.lesson-btn')
+  lessonButtons.forEach(btn => btn.classList.remove('active'))
+}
+
+
+
+
+
+
+
+
+const loadCategories = (id) => {
   fetch('https://openapi.programming-hero.com/api/categories')
   .then(res => res.json())
-  .then(json => displayCategory(json.categories))
+  .then(json => {
+    removeActive()
+    
+    
+    
+    displayCategory(json.categories)
+    const clickBtn = document.getElementById(`lesson-btn-${id}`)
+    clickBtn.classList.add('active')
+  });
 }
 
 const loadPlants = () => {
     fetch('https://openapi.programming-hero.com/api/plants')
+
+  
+
+
+
     .then(res => res.json())
-    .then(json => displayPlants(json.plants))
+    .then(json => {
+
+
+      // const clickBtn = document.getElementById(`lesson-btn-${id}`)
+
+
+
+
+      displayPlants(json.plants)
+    });
 }
 
 const displayCategory = (categories) => {
@@ -16,7 +50,7 @@ const displayCategory = (categories) => {
     for(let category of categories){
         const newDiv = document.createElement('div')
         newDiv.innerHTML = `
-        <p class="mt-4 ml-5 text-base font-medium">${category.category_name}</p>
+        <p id="lesson-btn-${category.id}" onclick="loadCategories(${category.id})" class="lesson-btn hover:bg-[#15803d] hover:text-white p-2 rounded-lg bg-[#f0fdf4] border-none mt-4 ml-5 text-base font-medium">${category.category_name}</p>
         `
         categoryContainer.append(newDiv)
     }
@@ -76,3 +110,15 @@ const displayPlants = (plants) => {
 
 
 loadPlants()
+
+
+
+
+
+
+
+
+
+
+
+
