@@ -86,7 +86,13 @@
       </div>
     </section>
 
-    <section class="py-12 bg-[#f0fdf4]">
+
+    <section id="spinner" class="flex justify-center items-center hidden py-10 bg-[#f0fdf4]">
+      <span class="loading loading-dots loading-xl"></span>
+    </section>
+
+
+    <section id="card-container" class="py-12 bg-[#f0fdf4]">
       <h2 class="text-center font-semibold text-4xl my-8">Choose Your Trees</h2>
 
       <div class="flex justify-around gap-10">
@@ -97,7 +103,7 @@
 
         <div
           id="allCardContainer"
-          class="grid gap-x-1 gap-y-1 lg:grid-cols-3 md:grid-cols-2 items-center"
+          class="grid lg:grid-cols-3 md:grid-cols-2 items-center"
         ></div>
 
         <div class="w-1/5 hidden md:flex flex-col p-5 bg-white h-[650px] mt-5 rounded-lg mr-20">
@@ -192,9 +198,9 @@
 
           <select class="select w-full border-none select-neutral">
             <option disabled selected>Number of Trees</option>
-            <option>North America</option>
-            <option>EU west</option>
-            <option>South East Asia</option>
+            <option>1 Tree - $5</option>
+            <option>5 Tree - $25</option>
+            <option>10 Tree - $50</option>
           </select>
 
           <button
