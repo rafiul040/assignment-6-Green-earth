@@ -1,3 +1,4 @@
+//Loader
 const manageLoading = status => {
   if(status == true){
     document.getElementById('spinner').classList.remove('hidden')
@@ -10,11 +11,22 @@ const manageLoading = status => {
   }
 }
 
+
+
+
+
+
+// remove activeClass
 const removeActive = () => {
   const lessonButtons = document.querySelectorAll('.lesson-btn');
   lessonButtons.forEach(btn => btn.classList.remove('active'));
 };
 
+
+
+
+
+// categories
 const loadCategories = () => {
   fetch('https://openapi.programming-hero.com/api/categories')
   .then(res => res.json())
@@ -26,6 +38,11 @@ const loadCategories = () => {
   });
 };
 
+
+
+
+
+// hover or active class on categories
 const handleCategoryClick = (id, categoryName) => {
   removeActive();
   const clickBtn = document.getElementById(`lesson-btn-${id}`);
@@ -35,6 +52,10 @@ const handleCategoryClick = (id, categoryName) => {
   loadPlants(categoryName);
 };
 
+
+
+
+// all plants api
 const loadPlants = (category) => {
   fetch('https://openapi.programming-hero.com/api/plants')
   .then(res => res.json())
@@ -47,6 +68,13 @@ const loadPlants = (category) => {
   });
 };
 
+
+
+
+
+
+
+// all categories
 const displayCategory = (categories) => {
   const categoryContainer = document.getElementById('categories-container');
   categoryContainer.innerHTML = "";
@@ -55,7 +83,7 @@ const displayCategory = (categories) => {
     newDiv.innerHTML = `
     <p id="lesson-btn-${category.id}" 
     onclick="handleCategoryClick(${category.id}, '${category.category_name}')" 
-    class="lesson-btn cursor-pointer hover:bg-[#15803d] hover:text-white p-2 rounded-lg bg-[#f0fdf4] border-none mt-4 ml-5 text-base font-medium">${category.category_name}</p>
+    class="lesson-btn cursor-pointer hover:bg-[#87a193] hover:text-white p-2 rounded-lg bg-[#f0fdf4] border-none mt-4 ml-5 text-base font-medium">${category.category_name}</p>
     `;
     categoryContainer.append(newDiv);
   }
@@ -70,12 +98,13 @@ const displayCategory = (categories) => {
 
 
 
-
-
+// card section
 const displayPlants = (plants) => {
   const containerPlants = document.getElementById('allCardContainer');
   containerPlants.innerHTML = "";
   
+
+
   for (let plant of plants) {
     const modalId = `modal-${plant.id}`
     const newDiv = document.createElement('div');
@@ -111,7 +140,12 @@ const displayPlants = (plants) => {
     <span class="text-base font-semibold">৳${plant.price}</span>
     </div>
     <div class="card-actions mt-2 justify-end">
-    <button class="btn bg-[#15803d] text-white w-full rounded-3xl">Add To Cart</button>
+
+
+    <button onclick='addToCart({id: ${plant.id},name: "${plant.name}",price: ${plant.price}})' class="btn bg-[#15803d] text-white w-full rounded-3xl">Add To Cart</button>
+
+
+
     </div>
     </div>
     </div>
@@ -129,6 +163,53 @@ const displayPlants = (plants) => {
 
 
 
+// this is the right side cart
+
+let cart = []; //Blank array
+
+function addToCart(plant) {
+  const totalItem = cart.find(item => item.id === plant.id);
+  if (totalItem) {
+    totalItem.quantity += 1; // quantity aded
+  } else {
+    cart.push({ ...plant, quantity: 1});
+  }
+  updateCartDisplay();
+}
+
+// update cart implement
+function updateCartDisplay() {
+  const cartContainer = document.getElementById('sideCart');
+  
+  let totalPrice = 0;
+  cartContainer.innerHTML = '';
+  cart.forEach(item => {
+    const subTotal = item.price * item.quantity;
+    totalPrice = totalPrice + subTotal;
+
+    const itemDiv = document.createElement('div');
+
+    itemDiv.classList.add('cart-item');
+    itemDiv.innerHTML = `
+      <div class='text-lg font-medium'>${item.name} x ${item.quantity}</div>
+      <div>৳${subTotal}</div>
+    `;
+    cartContainer.append(itemDiv);
+  });
+
+
+
+
+// Total cart Pricess
+const cartDiv = document.getElementById('cart-right');
+  cartDiv.innerHTML = `
+  <p class="text-base font-medium">Total:</p>
+            <p class="text-base font-semibold">৳${totalPrice}</p>
+  `;
+
+}
+
+
 
 
 
@@ -136,3 +217,6 @@ const displayPlants = (plants) => {
 
 
 loadCategories();
+
+
+

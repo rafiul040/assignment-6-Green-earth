@@ -36,16 +36,17 @@
             </div>
             <ul
               tabindex="0"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              class="menu menu-sm cursor-pointer  dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <li>About</li>
-              <li>Gallery</li>
-              <li>Plant a Tree</li>
+              <li class="hover:bg-slate-300 p-1 pl-3 m-2 font-semibold text-base rounded-lg">About</li>
+              <li class="hover:bg-slate-300 p-1 pl-3 m-2 font-semibold text-base rounded-lg">Gallery</li>
+              <li class="hover:bg-slate-300 p-1 pl-3 m-2 font-semibold text-base rounded-lg">Plant a Tree</li>
+              <!-- <div class="md:sm hidden"  id="categories-container"></div> -->
             </ul>
           </div>
           <a class="font-semibold md:ml-15 text-white text-xl">Green Earth</a>
         </div>
-        <div class="navbar-center hidden sm:flex">
+        <div class="navbar-center hidden md:flex">
           <ul
             class="menu menu-horizontal px-1 text-white text-base font-medium"
           >
@@ -109,22 +110,21 @@
         <div class="w-1/5 hidden md:flex flex-col p-5 bg-white h-[650px] mt-5 rounded-lg mr-20">
           <h4 class="text-lg font-semibold">Your Cart</h4>
           <div class="flex justify-between items-center mt-7 p-4 bg-[#f0fdf4] rounded-xl">
-            <div>
-              <p class="text-base font-medium">Mango Tree</p>
-              <span class="text-[#879395] ">৳500 x 1</span>
-            </div>
 
-            <div>
-              <span class="text-[#879395]">X</span>
-            </div>
+           
 
+            <div id="sideCart" class="side-cart-container p-4 overflow-y-auto max-h-screen"></div>
             
           </div>
           <hr class="mt-6">
-          <div class="flex justify-between m-4">
-            <p class="text-base font-medium">Total:</p>
-            <p class="text-base font-semibold">৳1000</p>
+          <div id="cart-right" class="flex justify-between m-4">
+            
           </div>
+
+
+
+
+
         </div>
       </div>
 
@@ -217,5 +217,6 @@
     </section>
 
     <script src="./script/script.js"></script>
+
   </body>
 </html>
