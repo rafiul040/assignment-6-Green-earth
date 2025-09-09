@@ -163,49 +163,60 @@ const displayPlants = (plants) => {
 
 
 
-// this is the right side cart
+// // this is the right side cart
 
-let cart = []; //Blank array
+let cart = [];
 
-function addToCart(plant) {
+// this is Add item to cart or increment
+const addToCart = plant => {
   const totalItem = cart.find(item => item.id === plant.id);
   if (totalItem) {
-    totalItem.quantity += 1; // quantity aded
+    totalItem.quantity += 1;
   } else {
     cart.push({ ...plant, quantity: 1});
   }
   updateCartDisplay();
 }
 
-// update cart implement
-function updateCartDisplay() {
+
+const removeFromCart = plantId => {
+  cart = cart.filter(item => item.id !== plantId);
+  updateCartDisplay();
+}
+
+
+const updateCartDisplay = () => {
   const cartContainer = document.getElementById('sideCart');
-  
-  let totalPrice = 0;
   cartContainer.innerHTML = '';
+
+  let totalPrice = 0;
   cart.forEach(item => {
     const subTotal = item.price * item.quantity;
     totalPrice = totalPrice + subTotal;
 
     const itemDiv = document.createElement('div');
-
-    itemDiv.classList.add('cart-item');
+    itemDiv.classList.add('cart-item', 'flex', 'justify-between', 'items-center', 'border-b', 'py-1');
     itemDiv.innerHTML = `
-      <div class='text-lg font-medium'>${item.name} x ${item.quantity}</div>
-      <div>৳${subTotal}</div>
+      <div>${item.name} x ${item.quantity}</div>
+      <div>
+        ৳${subTotal} 
+        <button onclick="removeFromCart(${item.id})" style="margin-left:10px; color:red; cursor:pointer;">❌</button>
+      </div>
     `;
-    cartContainer.append(itemDiv);
+    cartContainer.appendChild(itemDiv);
   });
 
 
 
 
-// Total cart Pricess
+// intotal prices
 const cartDiv = document.getElementById('cart-right');
   cartDiv.innerHTML = `
   <p class="text-base font-medium">Total:</p>
             <p class="text-base font-semibold">৳${totalPrice}</p>
   `;
+
+
 
 }
 
@@ -213,10 +224,4 @@ const cartDiv = document.getElementById('cart-right');
 
 
 
-
-
-
 loadCategories();
-
-
-
