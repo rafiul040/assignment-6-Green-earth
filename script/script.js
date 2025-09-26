@@ -42,7 +42,6 @@ const loadCategories = () => {
 
 
 
-// hover or active class on categories
 const handleCategoryClick = (id, categoryName) => {
   removeActive();
   const clickBtn = document.getElementById(`lesson-btn-${id}`);
