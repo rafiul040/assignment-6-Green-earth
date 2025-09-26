@@ -41,6 +41,7 @@ const loadCategories = () => {
 
 
 
+// hover or active class on categories
 
 const handleCategoryClick = (id, categoryName) => {
   removeActive();
