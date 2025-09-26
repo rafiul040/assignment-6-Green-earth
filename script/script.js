@@ -25,6 +25,7 @@ const removeActive = () => {
 
 
 
+// categories
 
 const loadCategories = () => {
   fetch('https://openapi.programming-hero.com/api/categories')
